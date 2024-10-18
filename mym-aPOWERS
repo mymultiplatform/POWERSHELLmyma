@@ -1,0 +1,11 @@
+# Change directory to the Startup folder
+cd "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup";
+
+# Create the URL shortcut
+echo "[InternetShortcut]" > "Open Grades.url";
+echo "URL=https://swccd.instructure.com/courses/72612/grades" >> "Open Grades.url";
+
+# Create the VBScript file
+echo 'Set WshShell = CreateObject("WScript.Shell")' > "OpenGrades.vbs";
+echo 'WshShell.Run "C:\Program Files\Google\Chrome\Application\chrome.exe"' >> "OpenGrades.vbs";
+echo 'WshShell.Run "https://swccd.instructure.com/courses/72612/grades"' >> "OpenGrades.vbs";
