@@ -1,0 +1,29 @@
+# Define the path where you want to save the black wallpaper
+$wallpaperPath = "$env:USERPROFILE\black_wallpaper.bmp"
+
+# Load the System.Drawing assembly
+Add-Type -AssemblyName System.Drawing
+
+# Create a new bitmap
+$blackImage = New-Object System.Drawing.Bitmap 1920,1080
+
+# Set the color to black
+$graphics = [System.Drawing.Graphics]::FromImage($blackImage)
+$graphics.Clear([System.Drawing.Color]::Black)
+
+# Save the image as BMP
+$blackImage.Save($wallpaperPath, [System.Drawing.Imaging.ImageFormat]::Bmp)
+
+# Clean up resources
+$graphics.Dispose()
+$blackImage.Dispose()
+
+# Set the wallpaper in the registry
+Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name Wallpaper -Value $wallpaperPath
+
+# Set the wallpaper style (0 = Center, 1 = Tile, 2 = Stretch)
+Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name WallpaperStyle -Value 2
+Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop\' -Name TileWallpaper -Value 0
+
+# Update the changes
+RUNDLL32.EXE user32.dll, UpdatePerUserSystemParameters
