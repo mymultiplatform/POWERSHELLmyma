@@ -1,1 +1,1 @@
-FUCK THE SYSTEM
+POWER SHELL COMMANDS by mymultiplatform
